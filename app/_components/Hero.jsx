@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect'
-import { BackgroundBeamsWithCollision } from '@/components/ui/BackgroundBeams'
+import { BackgroundBeamsWithCollision } from '@/components/ui/BackgroundBeams'  
 
 const Hero = () => {
   return (
