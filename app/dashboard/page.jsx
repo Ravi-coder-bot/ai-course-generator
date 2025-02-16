@@ -1,10 +1,11 @@
-import { UserButton } from '@clerk/nextjs'
+
 import React from 'react'
+import CourseAdd from './_components/CourseAdd'
 
 const Dashboard = () => {
   return (
     <div>
-        <UserButton/>
+        <CourseAdd/>
     </div>
   )
 }
