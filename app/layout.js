@@ -4,23 +4,8 @@ import { ThemeProvider } from "next-themes";
 import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
 import { Outfit } from "next/font/google";
 import { ToastContainer, Slide } from "react-toastify";
+import Navbar from "@/components/Navbar";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit", // Define a CSS variable for Outfit
-  weight: ["400", "700"], // Add the weights you need
-});
 
 export const metadata = {
   title: "Create Next App",
@@ -34,8 +19,9 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <GoogleOneTap/> 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased`}
+        className={` antialiased`}
       >
+        <Navbar></Navbar>
                     <ToastContainer
               position="top-right"
               autoClose={1500}

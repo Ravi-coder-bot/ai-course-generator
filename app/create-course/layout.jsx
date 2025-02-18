@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../dashboard/_components/Header'
+import Header from '../../components/Header1'
 
 const CreateCourseLayout = ({children}) => {
   return (
