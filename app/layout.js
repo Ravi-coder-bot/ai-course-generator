@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
 import { Outfit } from "next/font/google";
+import { ToastContainer, Slide } from "react-toastify";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,6 +36,20 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased`}
       >
+                    <ToastContainer
+              position="top-right"
+              autoClose={1500}
+              limit={3}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeOnClick={true}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover={false}
+              theme="colored"
+              transition={Slide}
+            />
        <ThemeProvider
           attribute="class"
           defaultTheme="system"
