@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 
 
 
+
 const CourseBasicInfo = ({course}) => {
   return (
     <div className='p-10 border rounded-xl shadow-sm mt-5'>
@@ -21,6 +22,7 @@ const CourseBasicInfo = ({course}) => {
                             <HiOutlinePuzzle size={20} />
                             {course?.category}
                           </h2>
+                          <Button className="w-full mt-5">Start</Button>
             </div>
             <div>
                 <Image src={'/placeholder.png'} width={300} height={300} alt="Course Banner"

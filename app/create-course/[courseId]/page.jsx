@@ -8,7 +8,8 @@ import { db } from '@/configs/db'
 import LoadingDialog from '../_components/LoadingDialog'
 import { Button } from '@/components/ui/button'
 import CourseBasicInfo from './_components/CourseBasicInfo'
-
+import CourseDetail from './_components/CourseDetail'
+import ChapterList from './_components/ChapterList'
 
 const CourseLayout = ({params}) => {
     const { user } = useUser();
@@ -37,8 +38,12 @@ const CourseLayout = ({params}) => {
             <CourseBasicInfo course={course} />
             
             {/* Course Detail */}
+            <CourseDetail course={course} />
+
             
             {/* List of Lesson */}
+            <ChapterList course={course} />
+
            
             <Button  className="my-10">
               Generate Course Content
