@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { HiOutlinePuzzle } from "react-icons/hi";
 import { Button } from "@/components/ui/button";
+import EditCourseBasicInfo from './EditCourseBasicInfo';
 
 
 
@@ -15,6 +16,7 @@ const CourseBasicInfo = ({course}) => {
                 <h2 className="text-3xl font-bold flex gap-1">
                             {course?.courseOutput?.CourseName}
                           </h2>
+                          <EditCourseBasicInfo course={course}/> 
                           <p className="text-sm text-gray-400 mt-3">
                             {course?.courseOutput?.Description}
                           </p>
