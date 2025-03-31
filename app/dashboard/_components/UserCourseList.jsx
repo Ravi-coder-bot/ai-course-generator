@@ -13,9 +13,7 @@ function UserCourseList() {
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  const { userCourseList, setUserCourseList } = useContext(
-    UserCourseListContext
-  );
+  const { userCourseList, setUserCourseList } = useContext(UserCourseListContext);
 
   const { user } = useUser();
   useEffect(() => {
