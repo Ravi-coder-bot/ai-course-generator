@@ -126,7 +126,7 @@ const CourseBasicInfo = ({ course, refreshData, edit = true  }) => {
               accept="image/*"
               id="upload-image"
               className="opacity-0"
-              onChange={onFileChanged}
+              onChange={onFileSelected}
             />
           )}
         </div>
