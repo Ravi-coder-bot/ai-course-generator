@@ -15,4 +15,12 @@ export const CourseList = pgTable("courseList", {
   publish: boolean("publish").default(false),
 })
 
+export const Chapters = pgTable("chapters", {
+    id: serial("id").primaryKey(),
+    courseId: varchar("courseId").notNull(),
+    chapterId: varchar("chapterId").notNull(),
+    content: json("content").notNull(),
+    videoId: json("videoId").notNull().$default("[]"),
+  });
+
 
