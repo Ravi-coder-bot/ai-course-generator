@@ -11,18 +11,16 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useParams } from "next/navigation";
 
 function Course({ params }) {
-  const Params = params; // Fixed incorrect usage of React.use
+  const Params = useParams(params);
   const { toast } = useToast();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
   useEffect(() => {
-    if (params) {
-      GetCourse();
-    }
+    params && GetCourse();
   }, [params]);
 
   const GetCourse = async () => {
@@ -32,7 +30,7 @@ function Course({ params }) {
         .from(CourseList)
         .where(eq(CourseList.courseId, Params?.courseId));
 
-      if (result[0]?.publish === false) {
+      if (result[0]?.publish == false) {
         router.replace("/dashboard");
         toast({
           variant: "destructive",
@@ -41,10 +39,11 @@ function Course({ params }) {
         });
         return;
       }
-
+      // console.log(result[0]);
       setCourse(result[0]);
       setLoading(false);
     } catch (error) {
+      // console.log(error);
       toast({
         variant: "destructive",
         duration: 3000,
@@ -54,7 +53,6 @@ function Course({ params }) {
       setLoading(false);
     }
   };
-
   return (
     <div>
       <Header />

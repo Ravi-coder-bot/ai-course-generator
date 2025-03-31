@@ -1,6 +1,6 @@
 "use client";
 import Skeleton from "react-loading-skeleton"; // Install via: npm install react-loading-skeleton
-import "react-loading-skeleton/dist/skeleton.css";
+import "react-loading-skeleton/dist/skeleton.css"; // Import default styles
 import { HiChevronDoubleLeft } from "react-icons/hi";
 import ChapterListCard from "./_components/ChapterListCard";
 import ChapterContent from "./_components/ChapterContent";
@@ -9,8 +9,10 @@ import { db } from "@/configs/db";
 import { Chapters, CourseList } from "@/configs/schema";
 import { and, eq } from "drizzle-orm";
 import { useToast } from "@/hooks/use-toast";
+import { useParams } from "next/navigation";
 
 function CourseStart({ params }) {
+  const Params = useParams(params);
   const [course, setCourse] = useState(null);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedChapterContent, setSelectedChapterContent] = useState(null);
@@ -24,14 +26,14 @@ function CourseStart({ params }) {
   };
 
   useEffect(() => {
-    if (params.courseId) GetCourse();
-  }, [params.courseId]);
+    if (Params) GetCourse();
+  }, [Params]);
 
   useEffect(() => {
-    if (course?.courseOutput?.Chapters?.length > 0) {
-      const firstChapter = course.courseOutput.Chapters[0];
+    if (course && course?.courseOutput?.Chapters?.length > 0) {
+      const firstChapter = course?.courseOutput?.Chapters[0];
       setSelectedChapter(firstChapter);
-      GetSelectedChapterContent(firstChapter.chapterId);
+      GetSelectedChapterContent(0);
     }
   }, [course]);
 
@@ -45,12 +47,14 @@ function CourseStart({ params }) {
       const result = await db
         .select()
         .from(CourseList)
-        .where(eq(CourseList.courseId, params.courseId));
+        .where(eq(CourseList.courseId, Params?.courseId));
 
       if (result.length > 0) {
-        setCourse(result[0]);
+        const fetchedCourse = result[0];
+        setCourse(fetchedCourse);
       }
     } catch (error) {
+      // console.error(error);
       toast({
         variant: "destructive",
         duration: 3000,
@@ -70,7 +74,7 @@ function CourseStart({ params }) {
         .from(Chapters)
         .where(
           and(
-            eq(Chapters.courseId, params.courseId),
+            eq(Chapters.courseId, course?.courseId),
             eq(Chapters.chapterId, chapterId)
           )
         );
@@ -79,6 +83,7 @@ function CourseStart({ params }) {
         setSelectedChapterContent(result[0]);
       }
     } catch (error) {
+      // console.log(error);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -119,19 +124,19 @@ function CourseStart({ params }) {
                   <Skeleton height={40} />
                 </div>
               ))
-            : course?.courseOutput?.Chapters.map((chapter) => (
+            : course?.courseOutput?.Chapters.map((chapter, index) => (
                 <div
-                  key={chapter.chapterId}
+                  key={index}
                   className={`cursor-pointer hover:bg-primary/30 ${
                     selectedChapter?.ChapterName === chapter?.ChapterName &&
                     "bg-primary/30"
                   }`}
                   onClick={() => {
                     setSelectedChapter(chapter);
-                    GetSelectedChapterContent(chapter.chapterId);
+                    GetSelectedChapterContent(index);
                   }}
                 >
-                  <ChapterListCard chapter={chapter} />
+                  <ChapterListCard chapter={chapter} index={index} />
                 </div>
               ))}
         </div>
@@ -149,7 +154,7 @@ function CourseStart({ params }) {
           <ChapterContent
             chapter={selectedChapter}
             content={selectedChapterContent}
-            handleSideBarFunction={handleSideBarFunction}
+            handleSideBarFunction={() => handleSideBarFunction()}
           />
         )}
       </div>
