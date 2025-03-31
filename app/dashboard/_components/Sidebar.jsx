@@ -9,12 +9,7 @@ import { GoShieldCheck } from "react-icons/go";
 import { TbLogout } from "react-icons/tb";
 import { Progress } from "@/components/ui/progress"
 import Link from 'next/link';
-import {
-    HiOutlineHome,
-    HiOutlineSquare3Stack3D,
-    HiOutlineShieldCheck,
-    HiMiniPower,
-  } from "react-icons/hi2";
+import {HiOutlineHome,} from "react-icons/hi2";
 
 const Sidebar = () => {
      const { userCourseList, setUserCourseList } = useContext(UserCourseListContext);
