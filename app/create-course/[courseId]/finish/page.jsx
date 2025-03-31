@@ -140,7 +140,7 @@ function FinishScreen({ params }) {
             <LinkedinShareButton
               title="Check out this course from SeedOfCode. "
               summary={`\nCourse Name : ${course?.courseOutput?.CourseName}\n Created By : ${course?.userName} \nClick on the link to view the course : `}
-              source={``}
+              source={`https://ai-course-generator-gamma-snowy.vercel.app/`}
               url={`${process.env.NEXT_PUBLIC_HOST_NAME}/course/${courseId}`}
             >
               <LinkedinIcon size={30} round={true} />
