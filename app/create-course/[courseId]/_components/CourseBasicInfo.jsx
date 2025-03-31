@@ -8,8 +8,9 @@ import { db } from "@/configs/db";
 import { CourseList } from "@/configs/schema";
 import { eq } from "drizzle-orm";
 import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
 
-const CourseBasicInfo = ({ course, refreshData }) => {
+const CourseBasicInfo = ({ course, refreshData, edit = true  }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
@@ -86,33 +87,48 @@ const CourseBasicInfo = ({ course, refreshData }) => {
           <h2 className="text-3xl font-bold flex gap-1">
             {course?.courseOutput?.CourseName}
           </h2>
-          <EditCourseBasicInfo course={course} refreshData={() => refreshData(true)} />
+          {edit && (<EditCourseBasicInfo course={course} size={50}refreshData={() => {refreshData(true);}}
+              />
+            )}
           <p className="text-sm text-gray-400 mt-3">{course?.courseOutput?.Description}</p>
           <h2 className="font-medium mt-2 flex gap-2 items-center text-primary">
             <HiOutlinePuzzle size={20} />
             {course?.category}
           </h2>
-          <Button className="w-full mt-5">Start</Button>
+          {!edit && ( <Link href={`/course/${course?.courseId}/start`}>
+              <Button className="w-full mt-5">Start</Button>
+               </Link>
+          )}
         </div>
 
         {/* Image Upload */}
         <div>
           <label htmlFor="course-banner">
-            <Image
-              src={selectedFile || course?.courseBanner || "/placeholder.png"}
-              width={300}
-              height={300}
-              alt="Course Banner"
-              className="w-full rounded-xl object-cover h-[250px] cursor-pointer"
-            />
+           <Image
+                         src={
+                           selectedFile
+                             ? selectedFile
+                             : course?.courseBanner || "/placeholder.png"
+                         }
+                         quality={100}
+                         priority={true}
+                         alt="placeholder image for course image"
+                         width={300}
+                         height={300}
+                         className={`w-full rounded-xl object-cover h-[250px] ${
+                           edit ? "cursor-pointer" : ""
+                         }`}
+                       />
           </label>
-          <input
-            type="file"
-            accept="image/*"
-            className="opacity-0"
-            id="course-banner"
-            onChange={onFileSelected}
-          />
+          {edit && (
+            <input
+              type="file"
+              accept="image/*"
+              id="upload-image"
+              className="opacity-0"
+              onChange={onFileChanged}
+            />
+          )}
         </div>
       </div>
     </div>

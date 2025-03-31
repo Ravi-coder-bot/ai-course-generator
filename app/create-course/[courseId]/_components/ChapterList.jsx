@@ -20,7 +20,8 @@ function ChapterList({ course, refreshData, edit = true }) {
               <div>
                 <h2 className="font-medium text-lg flex gap-1">
                   {chapter?.ChapterName}
-                  <EditChapters course={course} index={index} refreshData={refreshData} />
+                  {edit && (<EditChapters course={course} index={index} refreshData={() => refreshData(true)} />
+                  )}
 
                 </h2>
                 <p className="text-sm text-gray-500">{chapter?.About}</p>
