@@ -4,10 +4,15 @@ import { HiOutlinePuzzle } from "react-icons/hi";
 import { Button } from "@/components/ui/button";
 import EditCourseBasicInfo from "./EditCourseBasicInfo";
 import { supabase } from "@/lib/supabaseClient";
+import { db } from "@/configs/db";
+import { CourseList } from "@/configs/schema";
+import { eq } from "drizzle-orm";
+import { useToast } from "@/hooks/use-toast";
 
 const CourseBasicInfo = ({ course, refreshData }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const { toast } = useToast();
 
   const onFileSelected = async (e) => {
     try {
@@ -33,6 +38,12 @@ const CourseBasicInfo = ({ course, refreshData }) => {
         });
 
       if (error) throw error;
+      toast({
+        variant: "success",
+        duration: 3000,
+        title: "Image Uploaded Successfully!",
+        description: "Image has been uploaded successfully.",
+      });
 
       // Get public URL of the uploaded file
       const { data: publicUrlData } = supabase.storage
@@ -40,22 +51,31 @@ const CourseBasicInfo = ({ course, refreshData }) => {
         .getPublicUrl(fileName);
 
       const imageUrl = publicUrlData.publicUrl;
-      console.log("Image URL:", imageUrl);
+      {!imageUrl && toast({
+          variant: "error",
+          duration: 3000,
+          title: "Public URL not found.",
+          description: "There was a problem with your request.",
+      })}
+
 
       // Update database with new image URL
-      const { error: dbError } = await supabase
-        .from("courses")
-        .update({ courseBanner: imageUrl })
-        .eq("id", course.id);
-
-      if (dbError) throw dbError;
-
-      refreshData(true);
-      setUploading(false);
-    } catch (error) {
-      console.error("Error uploading file:", error.message);
-      setUploading(false);
-    }
+      
+            const result = await db
+              .update(CourseList)
+              .set({ courseBanner: imageUrl })
+              .where(eq(CourseList.id, course?.id));
+            // console.log(result);
+            refreshData(true);
+          } catch (error) {
+            // console.log(error);
+            toast({
+              variant: "destructive",
+              duration: 3000,
+              title: "Uh oh! Something went wrong.",
+              description: "There was a problem with your request.",
+            });
+          }
   };
 
   return (
@@ -88,10 +108,10 @@ const CourseBasicInfo = ({ course, refreshData }) => {
           </label>
           <input
             type="file"
+            accept="image/*"
             className="opacity-0"
             id="course-banner"
             onChange={onFileSelected}
-            disabled={uploading}
           />
         </div>
       </div>
