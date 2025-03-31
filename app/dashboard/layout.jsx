@@ -1,9 +1,16 @@
+"use client"
 import React from 'react'
 import Sidebar from './_components/Sidebar'
 import Header from './_components/Header'
+import { UserCourseListContext } from "../_context/UserCourseListContext";
+import { useState } from "react";
 
 const DashboardLayout = ({children}) => {
+  const [userCourseList, setUserCourseList] = useState([]);
   return (
+    <UserCourseListContext.Provider
+    value={{ userCourseList, setUserCourseList }}
+  >
     <div>
       <div className='md:w-64  hidden md:block'>
         <Sidebar/>
@@ -17,6 +24,7 @@ const DashboardLayout = ({children}) => {
       </div>
         
     </div>
+    </UserCourseListContext.Provider>
   )
 }
 
