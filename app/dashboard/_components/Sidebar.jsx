@@ -2,14 +2,28 @@
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import React from 'react'
-import { HiOutlineHome } from "react-icons/hi";
+import { UserCourseListContext } from "@/app/_context/UserCourseListContext";
+import { useContext,useEffect } from 'react';
 import { MdOutlineExplore } from "react-icons/md";
 import { GoShieldCheck } from "react-icons/go";
 import { TbLogout } from "react-icons/tb";
 import { Progress } from "@/components/ui/progress"
 import Link from 'next/link';
+import {
+    HiOutlineHome,
+    HiOutlineSquare3Stack3D,
+    HiOutlineShieldCheck,
+    HiMiniPower,
+  } from "react-icons/hi2";
 
 const Sidebar = () => {
+     const { userCourseList, setUserCourseList } = useContext(UserCourseListContext);
+    
+      useEffect(() => {
+        setUserCourseList(JSON.parse(localStorage.getItem("userCourseList")));
+      }, []);
+
+
     const path = usePathname();
     const Menu = [
         {
@@ -55,9 +69,20 @@ const Sidebar = () => {
             ))}
         </ul>
         <div className='absolute bottom-10 w-[80%]'>
-        <Progress value={33} />
-        <h2 className='text-sm my-2 font-bold'>3 Out off 5 courses created</h2>
-        <h2 className='text-xs text-gray-500'>Upgrade your plan for ulimited course generation</h2>
+        <Progress value={(userCourseList?.length / 5) * 100} />
+
+        <h2 className="text-sm my-2">
+          {userCourseList?.length} Out of 5 Course Created
+        </h2>
+        <Link href="/dashboard/upgrade">
+          <h2
+            className={`text-xs hover:underline text-gray-700 ${
+              (userCourseList?.length / 5) * 100 >= 60 && "text-blue-700"
+            }`}
+          >
+            Upgrade your plan for unlimited course generation
+          </h2>
+        </Link>
         </div>
 
     </div>
