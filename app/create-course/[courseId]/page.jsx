@@ -35,14 +35,14 @@ const CourseLayout = ({params}) => {
           <div className="mt-10 px-7 md:px-20 lg:px-44">
             <h2 className="font-bold text-center text-2xl">Course Layout</h2>
             {/* Basic Info */}
-            <CourseBasicInfo course={course} />
+            <CourseBasicInfo course={course} refreshData={()=>GetCourse()}/>
             
             {/* Course Detail */}
             <CourseDetail course={course} />
 
             
             {/* List of Lesson */}
-            <ChapterList course={course} />
+            <ChapterList course={course} refreshData={()=>GetCourse()}/>
 
            
             <Button  className="my-10">

@@ -7,7 +7,7 @@ import EditCourseBasicInfo from './EditCourseBasicInfo';
 
 
 
-const CourseBasicInfo = ({course}) => {
+const CourseBasicInfo = ({course, refreshData}) => {
   return (
     <div className='p-10 border rounded-xl shadow-sm mt-5'>
         <div className='grid grid-col-1 md:grid-cols-2 gap-10'>
@@ -16,7 +16,7 @@ const CourseBasicInfo = ({course}) => {
                 <h2 className="text-3xl font-bold flex gap-1">
                             {course?.courseOutput?.CourseName}
                           </h2>
-                          <EditCourseBasicInfo course={course}/> 
+                          <EditCourseBasicInfo course={course} refreshData={() => refreshData(true)}/> 
                           <p className="text-sm text-gray-400 mt-3">
                             {course?.courseOutput?.Description}
                           </p>
