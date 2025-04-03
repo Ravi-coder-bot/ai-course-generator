@@ -125,3 +125,4 @@ const CourseBasicInfo = ({ course, refreshData, edit = true }) => {
 };
 
 export default CourseBasicInfo;
+
