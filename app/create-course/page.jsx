@@ -131,13 +131,13 @@ const CreateCourse = () => {
             {StepperOptions.map((item,index)=>(
               <div className='flex items-center'>
                 <div className='flex flex-col items-center w-[50px] md:w-[100px]'>
-                  <div className={`bg-gray-200 rounded-full p-3 text-white ${activeIndex>=index && "bg-purple-500"}`}>
+                  <div className={`bg-gray-200 rounded-full p-3 text-white ${activeIndex>=index && "bg-blue-500"}`}>
                      {item.icon}
                   </div>
                   <h2 className='hidden md:block md:text-sm'>{item.title}</h2>
                 </div>
                 {index!= StepperOptions.length-1 && 
-                <div className={`h-1 w-[50px] md:w-[100px] lg:w-[170px] bg-gray-300 rounded-full ${activeIndex>=index+1 && "bg-purple-500"}`}>
+                <div className={`h-1 w-[50px] md:w-[100px] lg:w-[170px] bg-gray-300 rounded-full ${activeIndex>=index+1 && "bg-blue-500"}`}>
                 </div>
                 }
               </div>

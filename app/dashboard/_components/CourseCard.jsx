@@ -61,7 +61,7 @@ function CourseCard({ course, refreshData, displayUser = false }) {
   };
 
   return (
-    <div className="shadow-sm rounded-lg border p-2 hover:scale-105 transition-all cursor-pointer mt-4">
+    <div className="shadow-sm border p-2 hover:scale-105 transition-all cursor-pointer mt-4 bg-white dark:bg-gray-800">
       <Link
         href={
           course?.publish

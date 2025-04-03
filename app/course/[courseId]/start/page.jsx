@@ -143,7 +143,7 @@ function CourseStart({ params }) {
       </div>
 
       {/* Content Div : RHS */}
-      <div className="md:ml-72 p-10">
+      <div className="md:ml-72 p-10 dark:bg-gray-900">
         {contentLoading ? (
           <div>
             <Skeleton height={30} width={200} />

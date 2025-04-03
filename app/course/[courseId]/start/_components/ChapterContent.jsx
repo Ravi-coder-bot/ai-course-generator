@@ -33,8 +33,8 @@ function ChapterContent({ chapter, content, handleSideBarFunction }) {
         onClick={() => setSelectedVideo(index)}
         className={`${
           selectedVideo === index
-            ? "bg-primary text-white"
-            : "bg-white text-primary hover:text-white"
+            ? "bg-primary text-white dark:bg-primary dark:text-white"
+            : "bg-white text-primary dark:bg-gray-800 dark:text-gray-300 hover:text-white"
         } border-primary`}
       >
         Video {index + 1}
@@ -43,18 +43,18 @@ function ChapterContent({ chapter, content, handleSideBarFunction }) {
   };
 
   return (
-    <div className="px-10">
+    <div className="px-10 dark:bg-gray-900 dark:text-white min-h-screen">
       {/* Sidebar Toggle */}
       <HiChevronDoubleRight
         onClick={() => handleSideBarFunction(true)}
-        className="md:hidden mb-5 cursor-pointer border-green-500 border-2 rounded-sm hover:bg-primary hover:text-white"
+        className="md:hidden mb-5 cursor-pointer border-green-500 border-2 rounded-sm hover:bg-primary hover:text-white dark:border-green-400 dark:hover:bg-primary dark:hover:text-white"
         size={30}
       />
 
       {/* Chapter Information */}
       <div>
         <h2 className="font-medium text-4xl">{chapter?.ChapterName}</h2>
-        <p className="text-gray-500">{chapter?.About}</p>
+        <p className="text-gray-500 dark:text-gray-400">{chapter?.About}</p>
       </div>
 
       {/* Video Section */}
@@ -66,24 +66,21 @@ function ChapterContent({ chapter, content, handleSideBarFunction }) {
       </div>
 
       {/* General Note */}
-      <p className="text-sm text-gray-600 text-center mt-2 mb-4">
-        🎥 Multiple videos for any
-        chapter! These videos cover the same topic, allowing you to switch if you
+      <p className="text-sm text-gray-600 dark:text-gray-400 text-center mt-2 mb-4">
+        🎥 Multiple videos for any chapter! These videos cover the same topic, allowing you to switch if you
         don't like a particular video.
       </p>
 
       {/* Content Section */}
       <div>
         {content?.content?.chapters?.map((item, index) => (
-          <div key={index} className="p-5 bg-slate-50 mb-3 rounded-lg">
-            <h2 className="font-medium text-lg">
-              {`${index + 1}. ${item?.title}`}
-            </h2>
+          <div key={index} className="p-5 bg-slate-50 dark:bg-gray-800 mb-3 rounded-lg">
+            <h2 className="font-medium text-lg">{`${index + 1}. ${item?.title}`}</h2>
             <ReactMarkdown>{item?.explanation}</ReactMarkdown>
 
             {/* Code Example Section */}
             {item?.codeExample && (
-              <div className="p-4 bg-black text-gray-400 rounded-md mt-3">
+              <div className="p-4 bg-black dark:bg-gray-950 text-gray-400 rounded-md mt-3">
                 <h2 className="flex justify-end">
                   <HiOutlineClipboardList
                     onClick={async () =>
