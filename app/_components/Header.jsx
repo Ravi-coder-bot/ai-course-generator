@@ -5,8 +5,8 @@ import { ModeToggle } from '@/components/ui/ModeToggle'
 
 const Header = () => {
   return (
-    <div className=' p-5 flex  justify-between shadow-md'>
-        <Image src={'/logo.png'} width={150} height={100}/>
+    <div className=' p-5 flex  justify-between'>
+<h1 className='text-4xl font-bold'>WorkWise</h1>
         <div className='flex gap-2'>
             <ModeToggle />
             <Button>Get Started</Button>

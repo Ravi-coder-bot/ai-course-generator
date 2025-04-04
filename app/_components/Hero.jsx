@@ -17,7 +17,7 @@ const Hero = () => {
   
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <a
-            className="block w-full rounded-sm bg-primary px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:ring-3 focus:outline-hidden sm:w-auto"
+            className="block w-full rounded-sm bg-blue-700 px-12 py-3 text-sm font-medium text-white shadow-sm hover:bg-blue-500 transition-all duration-300 ease-in-out focus:ring-3 focus:outline-hidden sm:w-auto"
             href="/dashboard"
           >
             Get Started

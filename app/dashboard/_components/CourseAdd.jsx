@@ -18,7 +18,7 @@ const CourseAdd = () => {
         <Link href={
               userCourseList?.length >= 5 ? "/dashboard/upgrade" : "/create-course"
             }>
-         <Button>+ Create AI Course</Button>
+<button className=' bg-black text-white rounded-md p-2'>+ Create AI Course</button>
         </Link>
        
     </div>

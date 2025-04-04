@@ -22,15 +22,14 @@ const Sidebar = () => {
   const Menu = [
     { id: 1, name: "Home", icon: <HiOutlineHome />, link: "/dashboard" },
     { id: 2, name: "Explore", icon: <MdOutlineExplore />, link: "/dashboard/explore" },
-    { id: 3, name: "Upgrade", icon: <GoShieldCheck />, link: "/dashboard/upgrade" },
     { id: 4, name: "Logout", icon: <TbLogout />, link: "/dashboard/logout" },
   ];
 
   return (
-    <div className="fixed md:w-64 h-full p-6 bg-gray-800 shadow-lg flex flex-col">
+    <div className="fixed md:w-64 h-full p-6 bg-black shadow-lg flex flex-col">
       {/* Logo */}
       <div className="flex justify-center">
-        <Image src={"/logo.png"} width={120} height={80} alt="Logo" className="drop-shadow-lg" />
+        <h1 className="text-white font-extrabold text-4xl">WorkWise</h1>
       </div>
 
       {/* Menu List */}
@@ -38,9 +37,9 @@ const Sidebar = () => {
         {Menu.map((item) => (
           <Link href={item.link} key={item.id}>
             <div
-              className={`flex items-center gap-4 text-gray-300 p-3 rounded-lg cursor-pointer
-                transition-all duration-300 ease-in-out hover:bg-gradient-to-r from-blue-500 to-purple-600 hover:text-white shadow-md
-                ${path === item.link ? "bg-blue-600 text-white" : ""}
+              className={`flex items-center gap-4 text-gray-400 p-3 rounded-lg cursor-pointer
+                transition-all duration-300 ease-in-out hover:bg-gray-700 hover:text-white shadow-md
+                ${path === item.link ? "bg-gray-600 text-white" : ""}
               `}
             >
               <span className="text-2xl">{item.icon}</span>
@@ -51,8 +50,8 @@ const Sidebar = () => {
       </ul>
 
       {/* Progress Bar Section */}
-      <div className="absolute bottom-10 w-[80%] text-center text-gray-300">
-        <Progress value={(userCourseList?.length / 5) * 100} className="bg-gray-700" />
+      <div className="absolute bottom-10 w-[80%] text-center text-gray-400">
+        <Progress value={(userCourseList?.length / 5) * 100} className="bg-gray-600" />
 
         <h2 className="text-sm my-2">
           {userCourseList?.length} Out of 5 Courses Created
@@ -61,7 +60,7 @@ const Sidebar = () => {
         <Link href="/dashboard/upgrade">
           <h2
             className={`text-xs underline transition-all ${
-              (userCourseList?.length / 5) * 100 >= 60 ? "text-blue-400 hover:text-blue-500" : "text-gray-500"
+              (userCourseList?.length / 5) * 100 >= 60 ? "text-white hover:text-gray-300" : "text-gray-500"
             }`}
           >
             Upgrade your plan for unlimited course generation
